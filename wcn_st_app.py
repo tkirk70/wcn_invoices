@@ -22,18 +22,20 @@ def main():
 
             # Filter df by product list
             fbp_df = df[df['Product/Service'].isin(products)]
+            
+            today = date.today()
 
             st.dataframe(fbp_df)
-            file_name = 'Current_File.xlsx'
+            file_name = f'WCN_Invoices_Jan23-{today}.xlsx'
             fbp_df.to_excel(file_name, index=None)
-            today = date.today()
+            
             
             with open(file_name, "rb") as template_file:
                 template_byte = template_file.read()
 
-            st.download_button(label="Click to Download Template File",
+            st.download_button(label="Click to Download Filtered Invoices File",
                         data=template_byte,
-                        file_name="template.xlsx",
+                        file_name=file_name,
                         mime='application/octet-stream')
 
         except Exception as e:
