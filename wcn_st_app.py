@@ -40,7 +40,7 @@ def main():
 def get_download_link(text):
     today = date.today()
     # Generate a download link for the text file
-    href = f'<a href="data:text/plain;charset=utf-8,{text}" download="WCN_Invoices_{today}.xlsx">Download filtered invoices as Excel file.</a>'
+    href = f'<a href="data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8,{text}" download="WCN_Invoices_{today}.xlsx">Download filtered invoices as Excel file.</a>'
     return href
 
 if __name__ == "__main__":
