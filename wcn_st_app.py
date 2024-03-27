@@ -16,7 +16,7 @@ def main():
         st.write('Preview of DataFrame')
         try:
             # Read the Excel file
-            df = pd.read_excel(uploaded_file, skiprows=4, engine='xlsxwriter')
+            df = pd.read_excel(uploaded_file, skiprows=4, engine='openpyxl')
             df = df.iloc[:-1]
             products = ['KH60', 'KH61', 'KL33', 'KK91', 'KK37', 'KK95', 'KK97', 'KK98', 'KL28', 'KL29', 'KL30', 'KL31', 'KL32', 'KL34', 'KK38', 'KK36']
 
