@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 from datetime import date
 import openpyxl
+from io import BytesIO
 
 def main():
     st.set_page_config(layout="wide")
@@ -29,7 +30,12 @@ def main():
             today = date.today()
             
             # Convert to new excel file
-            output_text = fbp_df.to_excel(f'Invoices filtered by product list Jan23-{today}.xlsx', index=None)
+            # output_text = fbp_df.to_excel(f'Invoices filtered by product list Jan23-{today}.xlsx', index=None)
+            
+            # Convert to a new Excel file
+            output_buffer = BytesIO()
+            fbp_df.to_excel(output_buffer, index=None, engine='openpyxl')
+            output_text = output_buffer.getvalue()
 
             # Create a download link
             st.markdown(get_download_link(output_text), unsafe_allow_html=True)
