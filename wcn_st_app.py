@@ -22,7 +22,7 @@ def main():
 
             # Filter df by product list
             fbp_df = df[df['Product/Service'].isin(products)]
-            
+            fbp_df.sort_values(by='Date', inplace=True)
             today = date.today()
 
             st.dataframe(fbp_df)
