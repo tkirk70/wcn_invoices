@@ -17,12 +17,14 @@ def main():
             # Read the Excel file
             df = pd.read_excel(uploaded_file, skiprows=4, engine='openpyxl')
             df = df.iloc[:-1]
-            products = ['KH60', 'KH61','KL33','KK91','KK37','KK95', 'KK97', 'KK98', 'KL28', 'KL29', 'KL30','KL31',	'KL32',	 'KL34','KK38', 'KK36']
+            products = ['KH60','KH61','KL33','KK91','KK37','KK95','KK97','KK98','KL28','KL29','KL30','KL31','KL32','KL34','KK38','KK36']
 
 
 	    
             # filter df by product list
             fbp_df = df[df['Product/Service'].isin(products)]
+            
+            st.dataframe(fbp_df)
 	    
             today = date.today()
             
