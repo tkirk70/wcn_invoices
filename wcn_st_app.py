@@ -16,7 +16,7 @@ def main():
         st.write('Preview of DataFrame')
         try:
             # Read the Excel file
-            df = pd.read_excel(uploaded_file, skiprows=4, engine='openpyxl')
+            df = pd.read_excel(uploaded_file, skiprows=4, engine='xlsxwriter')
             df = df.iloc[:-1]
             products = ['KH60', 'KH61', 'KL33', 'KK91', 'KK37', 'KK95', 'KK97', 'KK98', 'KL28', 'KL29', 'KL30', 'KL31', 'KL32', 'KL34', 'KK38', 'KK36']
 
@@ -41,7 +41,7 @@ def main():
 def get_download_link(text):
     today = date.today()
     # Generate a download link for the Excel file
-    href = f'<a href="data:application/text;charset=utf-8,{text}" download="WCN_Invoices_{today}.xlsx">Download filtered invoices as Excel file.</a>'
+    href = f'<a href="data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8,{text}" download="WCN_Invoices_{today}.xlsx">Download filtered invoices as Excel file.</a>'
     return href
 
 if __name__ == "__main__":
