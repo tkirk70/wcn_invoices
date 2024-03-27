@@ -24,25 +24,22 @@ def main():
             fbp_df = df[df['Product/Service'].isin(products)]
 
             st.dataframe(fbp_df)
-
+            file_name = 'Current_File.xlsx'
+            fbp_df.to_excel(file_name, index=None)
             today = date.today()
+            
+            with open(file_name, "rb") as template_file:
+                template_byte = template_file.read()
 
-            # Convert to a new Excel file
-            output_buffer = BytesIO()
-            fbp_df.to_excel(output_buffer, index=None, engine='openpyxl')
-            output_text = output_buffer.getvalue()
+            st.download_button(label="Click to Download Template File",
+                        data=template_byte,
+                        file_name="template.xlsx",
+                        mime='application/octet-stream')
 
-            # Create a download link
-            st.markdown(get_download_link(output_text), unsafe_allow_html=True)
         except Exception as e:
             st.write('An Error Occurred.')
             st.error(f"Error reading the file: {e}")
 
-def get_download_link(text):
-    today = date.today()
-    # Generate a download link for the Excel file
-    href = f'<a href="data:text/plain;charset=utf-8,{text}" download="WCN_Invoices_{today}.xlsx">Download filtered invoices as Excel file.</a>'
-    return href
 
 if __name__ == "__main__":
     main()
