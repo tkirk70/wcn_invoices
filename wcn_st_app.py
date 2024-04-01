@@ -1,7 +1,9 @@
 import streamlit as st
 import pandas as pd
 from datetime import date
-import openpyxl
+from openpyxl import Workbook
+from openpyxl.worksheet.table import Table, TableStyleInfo
+
 from io import BytesIO
 
 def main():
