@@ -1,7 +1,7 @@
-import streamlit as st
 import pandas as pd
 from datetime import date
-import openpyxl
+from openpyxl import Workbook
+from openpyxl.worksheet.table import Table, TableStyleInfo
 from io import BytesIO
 
 def main():
@@ -25,11 +25,10 @@ def main():
             fbp_df.sort_values(by='Num', inplace=True)
             today = date.today()
 
-            st.dataframe(fbp_df)
+            # Save the filtered DataFrame to an Excel file
             file_name = f'WCN_Invoices_Jan23-{today}.xlsx'
             fbp_df.to_excel(file_name, index=None)
-            
-            # from CoPilot
+
             # Create an Excel table
             workbook = Workbook()
             sheet = workbook.active
@@ -46,21 +45,15 @@ def main():
             with BytesIO() as buffer:
                 workbook.save(buffer)
                 template_byte = buffer.getvalue()
-            
-            # End Copilot
-            # Commenting the below code which worked before.
-            # with open(file_name, "rb") as template_file:
-            #     template_byte = template_file.read()
 
             st.download_button(label="Click to Download Filtered Invoices File",
-                        data=template_byte,
-                        file_name=file_name,
-                        mime='application/octet-stream')
+                               data=template_byte,
+                               file_name=file_name,
+                               mime='application/octet-stream')
 
         except Exception as e:
             st.write('An Error Occurred.')
             st.error(f"Error reading the file: {e}")
-
 
 if __name__ == "__main__":
     main()
