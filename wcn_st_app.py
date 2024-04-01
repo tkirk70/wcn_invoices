@@ -3,7 +3,7 @@ import pandas as pd
 from datetime import date
 from openpyxl import Workbook
 from openpyxl.worksheet.table import Table, TableStyleInfo
-
+from openpyxl.utils.dataframe import dataframe_to_rows  # Import the missing function
 from io import BytesIO
 
 def main():
